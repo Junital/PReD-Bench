@@ -1,0 +1,7 @@
+pandas
+tqdm
+transformers
+datasets
+peft
+trl
+scikit-learn
