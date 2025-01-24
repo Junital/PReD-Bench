@@ -12,12 +12,13 @@ parser.add_argument('--task_name', type=str, default="xag", help="The task name 
 parser.add_argument('--epoch', type=int, default=4, help="Epoch num for fine-tuning.")
 args = parser.parse_args()
 
-train_data = pd.read_json(f"./dataset/{args.task_name}_train_finetune.json")
-text_json = []
+dataset = load_dataset("json", data_files=f"./XAG/data/{args.task_name}_test_finetune.json")
+dataset = dataset["train"]
 
-for idx, row in train_data.iterrows():
-    text_json.append({"text": "<s>[INST] " + row["input"] + " [/INST] " + row["output"]})
-dataset = load_dataset('json', data_files={'train': text_json})
+def format_input(batch):
+    return {"text": [f"<s>[INST] {x} [/INST] {y}" for x, y in zip(batch["input"], batch["output"])]}
+
+dataset = dataset.map(format_input, batched=True, remove_columns=["input", "output"])
 
 tokenizer = AutoTokenizer.from_pretrained(args.llm_dir)
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
@@ -59,12 +60,11 @@ training_args = TrainingArguments(
     logging_steps=200,
     save_strategy="steps",            # 每隔固定步数保存模型
     save_steps=200,                   # 每 100 步保存一次模型
-    report_to="tensorboard",
 )
 
 trainer = SFTTrainer(
     model=model,
-    train_dataset=dataset["train"],
+    train_dataset=dataset,
     peft_config=lora_config,
     tokenizer=tokenizer,
     args=training_args

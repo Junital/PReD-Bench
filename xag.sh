@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LLM_PATH = "PATH_TO_LLM"
+LLM_PATH='PATH_TO_LLM'
 
-python XAG/finetune.py --llm_dir "$LLM_PATH"
-python XAG/evaluate.py --llm_dir "$LLM_PATH"
+python -m XAG.finetune --llm_dir "$LLM_PATH"
+python -m XAG.evaluate --llm_dir "$LLM_PATH"

@@ -13,7 +13,7 @@ parser.add_argument('--llm_dir', type=str, required=True, help="The path for pre
 parser.add_argument('--task_name', type=str, default="xag", help="The task name for this fine-tuning.")
 args = parser.parse_args()
 
-dataset = load_dataset("json", data_files=f"./dataset/{args.task_name}_test_finetune.json")
+dataset = load_dataset("json", data_files=f"./XAG/data/{args.task_name}_test_finetune.json")
 dataset = dataset["train"]
 
 def format_input(batch):
@@ -90,4 +90,4 @@ for number in tqdm(get_checkpoints(f"./{args.task_name}")):
 
 total_df = pd.DataFrame(total_data)
 print(total_df)
-total_df.to_csv(f"./output/{args.task_name}_20250113.csv", index=False)
+total_df.to_csv(f"./output/{args.task_name}.csv", index=False)
