@@ -17,10 +17,10 @@ Install the necessary packages for PReD-Bench using `pip`:
 pip install -r requirements.txt
 ```
 
-Download the LLaMA 3 pretrained models to your preferred directory. Update the `LLM_PATH` in the `xag.sh` script to point to the directory where the models are stored.
+Download the LLaMA 3 pretrained models to your preferred directory. Update the `LLM_PATH` in the `STRIDE.sh` script to point to the directory where the models are stored.
 
-Execute the following command to run the `xag` script:
+Execute the following command to run the `STRIDE` script:
 
 ```bash
-bash xag.sh
+bash STRIDE.sh
 ```
