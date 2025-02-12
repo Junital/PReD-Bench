@@ -24,3 +24,26 @@ Execute the following command to run the `STRIDE` script:
 ```bash
 bash STRIDE.sh
 ```
+
+## Dataset Card
+Huggingface link: https://huggingface.co/datasets/Junital/PReD-Bench
+
+task_categories:
+- token-classification
+- question-answering
+
+language:
+- en
+
+pretty_name: PReD-Bench
+
+size_categories:
+- 1K<n<10K
+
+You can use the dataset: 
+``` python
+from datasets import load_dataset
+
+# Login using e.g. `huggingface-cli login` to access this dataset
+ds = load_dataset("Junital/PReD-Bench")
+```
